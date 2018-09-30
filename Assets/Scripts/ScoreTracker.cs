@@ -13,10 +13,11 @@ public class ScoreTracker : MonoBehaviour {
     void Start () {
         leftBounds = -3.0f;
         rightBounds = 3.0f;
+        score = 0.0f;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        Debug.Log(score);
 	}
 }
