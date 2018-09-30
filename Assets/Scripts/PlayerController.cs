@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private float lb;
+    private float rb;
+
     private float move;
-    public float speed = 8.0f;
+    public float speed;
 
     void Start ()
-    { 
+    {
+        GameObject score = GameObject.Find("ScoreTracker");
+        ScoreTracker scoreTracker = score.GetComponent<ScoreTracker>();
+
+        speed = 5.0f;
+
+        lb = scoreTracker.leftBounds;
+        rb = scoreTracker.rightBounds;
+
         if (gameObject.tag == "p1")
         {
             gameObject.transform.Translate(-1.0f, 0.0f, 0.0f);
@@ -33,6 +44,16 @@ public class PlayerController : MonoBehaviour
         translation *= Time.deltaTime;
         transform.Translate(translation, 0, 0);
 
-          
+        if (gameObject.transform.position.x < lb){
+            float diff = lb - gameObject.transform.position.x;
+            transform.Translate(diff, 0, 0);
+        }
+        if (gameObject.transform.position.x > rb)
+        {
+            float diff = rb - gameObject.transform.position.x;
+            transform.Translate(diff, 0, 0);
+        }
+
+
     }
 }
